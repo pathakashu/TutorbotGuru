@@ -40,15 +40,24 @@ const App: React.FC = () => {
   useEffect(() => {
     const saved = localStorage.getItem('tutorbot_india_profile');
     if (saved) {
-      const profile = JSON.parse(saved);
-      setUserProfile(profile);
-      setSelectedGrade(profile.grade);
+      try {
+        const profile = JSON.parse(saved);
+        setUserProfile(profile);
+        setSelectedGrade(profile.grade);
+      } catch (e) {
+        console.error("Failed to parse profile", e);
+        localStorage.removeItem('tutorbot_india_profile');
+      }
     } else {
       setActiveTab(AppTab.ONBOARDING);
     }
     const savedDownloads = localStorage.getItem('tutorbot_downloads');
     if (savedDownloads) {
-      setDownloadedIds(JSON.parse(savedDownloads));
+      try {
+        setDownloadedIds(JSON.parse(savedDownloads));
+      } catch (e) {
+        setDownloadedIds([]);
+      }
     }
   }, []);
 
@@ -60,10 +69,25 @@ const App: React.FC = () => {
   };
 
   const handleLogout = () => {
-    if (confirm('Log out of Tutorbot?')) {
+    const message = t('logout_confirm') || 'Log out of Tutorbot? All progress and downloads will be cleared.';
+    if (confirm(message)) {
+      // 1. Clear all storage
       localStorage.removeItem('tutorbot_india_profile');
+      localStorage.removeItem('tutorbot_downloads');
+      
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('tutorbot_')) {
+          localStorage.removeItem(key);
+        }
+      });
+      
+      // 2. Clear state
       setUserProfile(null);
-      setActiveTab(AppTab.ONBOARDING);
+      setActiveLesson(null);
+      setDownloadedIds([]);
+      
+      // 3. Force reload to ensure a fresh context and clear AI session artifacts
+      window.location.reload();
     }
   };
 
@@ -116,7 +140,8 @@ const App: React.FC = () => {
     return matchesSubject && matchesGrade && isBoardRelevant;
   });
 
-  if (!userProfile && activeTab === AppTab.ONBOARDING) {
+  // Simplified Profile Guard
+  if (!userProfile) {
     return <div className="min-h-screen"><Onboarding onComplete={handleOnboarding} /></div>;
   }
 
@@ -156,6 +181,7 @@ const App: React.FC = () => {
         </nav>
 
         <div className="p-6 space-y-4">
+          {/* Language Switcher */}
           <div className="relative">
             <button 
               onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
