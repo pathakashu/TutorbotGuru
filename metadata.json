@@ -1,0 +1,7 @@
+{
+  "name": "Tutorbot MVP",
+  "description": "A personalized AI-powered educational platform featuring a content library, learning paths, progress tracking, and multilingual support with text-to-speech capabilities.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
