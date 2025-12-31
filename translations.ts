@@ -5,7 +5,7 @@ export const translations: Record<string, any> = {
     library: "Library",
     doubtSupport: "Doubt Support",
     offline: "Offline",
-    welcome: "Pranam",
+    welcome: "Welcome",
     class: "Class",
     days: "Days",
     xp: "XP",
@@ -27,14 +27,16 @@ export const translations: Record<string, any> = {
     startFirstLesson: "Start your first lesson to get advice!",
     allGrades: "All Grades",
     allSubjects: "All Subjects",
-    filter: "Filter"
+    filter: "Filter",
+    language: "Language",
+    selectLanguage: "Select Language"
   },
   hi: {
     home: "मुख्य पृष्ठ",
     library: "पाठशाला",
     doubtSupport: "शंका समाधान",
     offline: "ऑफलाइन",
-    welcome: "प्रणाम",
+    welcome: "नमस्ते",
     class: "कक्षा",
     days: "दिन",
     xp: "एक्सपी",
@@ -56,14 +58,16 @@ export const translations: Record<string, any> = {
     startFirstLesson: "सलाह पाने के लिए अपना पहला पाठ शुरू करें!",
     allGrades: "सभी कक्षाएं",
     allSubjects: "सभी विषय",
-    filter: "फ़िल्टर"
+    filter: "फ़िल्टर",
+    language: "भाषा",
+    selectLanguage: "भाषा चुनें"
   },
   mr: {
     home: "मुख्य पान",
     library: "पाठशाळा",
     doubtSupport: "शंका समाधान",
     offline: "ऑफलाइन",
-    welcome: "प्रणाम",
+    welcome: "नमस्ते",
     class: "इयत्ता",
     days: "दिवस",
     xp: "एक्सपी",
@@ -85,7 +89,9 @@ export const translations: Record<string, any> = {
     startFirstLesson: "सल्ला मिळवण्यासाठी तुमचा पहिला पाठ सुरू करा!",
     allGrades: "सर्व इयत्ता",
     allSubjects: "सर्व विषय",
-    filter: "फिल्टर"
+    filter: "फिल्टर",
+    language: "भाषा",
+    selectLanguage: "भाषा निवडा"
   },
   ta: {
     home: "முகப்பு",
@@ -114,14 +120,47 @@ export const translations: Record<string, any> = {
     startFirstLesson: "ஆலோசனை பெற முதல் பாடத்தைத் தொடங்குங்கள்!",
     allGrades: "அனைத்து வகுப்புகள்",
     allSubjects: "அனைத்து பாடங்கள்",
-    filter: "வடிகட்டி"
+    filter: "வடிகட்டி",
+    language: "மொழி",
+    selectLanguage: "மொழியைத் தேர்ந்தெடுக்கவும்"
+  },
+  te: {
+    home: "హోమ్",
+    library: "పాఠశాల",
+    doubtSupport: "సందేహ నివృత్తి",
+    offline: "ఆఫ్‌లైన్",
+    welcome: "నమస్కారం",
+    class: "తరగతి",
+    days: "రోజులు",
+    xp: "ఎక్స్‌పి",
+    progress: "మీ పురోగతి",
+    recommended: "మీ కోసం సిఫార్సు చేయబడినవి",
+    syllabusFocus: "సిలబస్ ఫోకస్",
+    achievements: "విజయాలు",
+    askGuru: "గురువును అడగండి",
+    guruInsight: "గురువు అంతర్దృష్టి",
+    startLearning: "నేర్చుకోవడం ప్రారంభించండి",
+    logout: "లాగ్ అవుట్",
+    readToMe: "నా కోసం చదవండి",
+    stop: "ఆపండి",
+    takeQuiz: "క్విజ్ తీసుకోండి",
+    completeLesson: "పాఠం పూర్తి చేయండి",
+    backToLibrary: "తిరిగి పాఠశాలకు",
+    matchesBoard: "బోర్డుకు సరిపోతుంది",
+    guruAnalyzing: "గురువు మీ పురోగతిని విశ్లేషిస్తున్నారు...",
+    startFirstLesson: "సలహా కోసం మీ మొదటి పాఠాన్ని ప్రారంభించండి!",
+    allGrades: "అన్ని తరగతులు",
+    allSubjects: "అన్ని సబ్జెక్టులు",
+    filter: "ఫిల్టర్",
+    language: "భాష",
+    selectLanguage: "భాషను ఎంచుకోండి"
   },
   bn: {
     home: "হোম",
     library: "পাঠশালা",
     doubtSupport: "সন্দেহ সমাধান",
     offline: "অফলাইন",
-    welcome: "প্রণাম",
+    welcome: "নমস্কার",
     class: "শ্রেণী",
     days: "দিন",
     xp: "এক্সপি",
@@ -143,6 +182,8 @@ export const translations: Record<string, any> = {
     startFirstLesson: "পরামর্শ পেতে তোমার প্রথম পাঠ শুরু করো!",
     allGrades: "সব শ্রেণী",
     allSubjects: "সব বিষয়",
-    filter: "ফিল্টার"
+    filter: "ফিল্টার",
+    language: "ভাষা",
+    selectLanguage: "ভাষা নির্বাচন করুন"
   }
 };

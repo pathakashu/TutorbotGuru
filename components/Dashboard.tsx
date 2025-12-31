@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Trophy, Flame, Star, ChevronRight, TrendingUp, Target, Sparkles, Loader2, RefreshCw } from 'lucide-react';
+import { Trophy, Flame, Star, ChevronRight, TrendingUp, Target, Sparkles, Loader2, RefreshCw, ShieldCheck } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { UserProfile, Lesson } from '../types';
 import { MOCK_LESSONS, BADGES } from '../constants';
@@ -49,10 +49,12 @@ const Dashboard: React.FC<DashboardProps> = ({ profile, onStartLesson, onOpenCha
     }
   }, [profile.points]);
 
+  // Logic: First find lessons that match the user's Grade exactly AND their board.
   const recommended = MOCK_LESSONS.filter(lesson => {
     const isNotCompleted = !profile.completedLessons.includes(lesson.id);
     const matchesGrade = lesson.level.includes(profile.grade.replace('Class ', '')) || lesson.level === profile.grade;
-    return isNotCompleted && matchesGrade;
+    const matchesBoard = lesson.board === profile.board || lesson.board === 'All';
+    return isNotCompleted && matchesGrade && matchesBoard;
   }).slice(0, 3);
 
   const finalRecommended = recommended.length > 0 ? recommended : MOCK_LESSONS.filter(l => !profile.completedLessons.includes(l.id)).slice(0, 2);
@@ -94,7 +96,6 @@ const Dashboard: React.FC<DashboardProps> = ({ profile, onStartLesson, onOpenCha
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          {/* AI Progress Insight Section */}
           <section className="relative overflow-hidden bg-gradient-to-br from-indigo-700 via-indigo-800 to-indigo-950 p-8 rounded-[40px] text-white shadow-2xl shadow-indigo-100 border border-white/10">
             <div className="absolute -top-10 -right-10 p-10 opacity-10 pointer-events-none">
               <Sparkles size={240} />
@@ -182,7 +183,14 @@ const Dashboard: React.FC<DashboardProps> = ({ profile, onStartLesson, onOpenCha
                       {lesson.subject[0]}
                     </div>
                     <div>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{lesson.subject}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{lesson.subject}</p>
+                        {lesson.board === profile.board && (
+                          <span className="flex items-center gap-1 text-[8px] font-black text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded-md uppercase">
+                            <ShieldCheck size={10} /> Syllabus Match
+                          </span>
+                        )}
+                      </div>
                       <h3 className="font-bold text-slate-900 leading-tight line-clamp-1 group-hover:text-orange-600 transition-colors font-heading">{lesson.title}</h3>
                     </div>
                   </div>

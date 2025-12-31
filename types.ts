@@ -10,6 +10,7 @@ export interface Lesson {
   level: string; // e.g., "Class 6"
   duration: string;
   content: string;
+  board?: Board | 'All';
   videoUrl?: string;
   quiz?: QuizQuestion[];
 }

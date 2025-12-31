@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { UserProfile, Board } from '../types';
-import { Sparkles, GraduationCap, Globe, ArrowRight, MapPin } from 'lucide-react';
+import { Sparkles, GraduationCap, Globe, ArrowRight, MapPin, CheckCircle } from 'lucide-react';
 import { LANGUAGES, INDIAN_STATES, BOARDS } from '../constants';
 
 interface OnboardingProps {
@@ -29,29 +29,29 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
       points: 50,
       badges: [],
       streak: 1,
-      level: 'Beginner'
     });
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#FDF6F0]">
-      <div className="max-w-md w-full bg-white rounded-[32px] shadow-xl border border-orange-100 overflow-hidden">
+      <div className="max-w-md w-full bg-white rounded-[40px] shadow-2xl border border-orange-100 overflow-hidden relative">
         <div className="h-2 bg-slate-100">
           <div 
-            className="h-full bg-orange-600 transition-all duration-500" 
+            className="h-full bg-orange-600 transition-all duration-700 ease-out" 
             style={{ width: `${(step / 3) * 100}%` }}
           />
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8">
+        <form onSubmit={handleSubmit} className="p-10">
           {step === 1 && (
-            <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-600">
-                  <Sparkles size={24} />
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-6 duration-700">
+              <div className="space-y-2">
+                <div className="w-14 h-14 bg-orange-100 rounded-[22px] flex items-center justify-center text-orange-600 mb-6 shadow-sm border border-orange-50">
+                  <Sparkles size={28} />
                 </div>
-                <h2 className="text-2xl font-black text-slate-900">Namaste! What is your name?</h2>
+                <h2 className="text-3xl font-black text-slate-900 font-heading leading-tight">Namaste!<br/>What is your name?</h2>
               </div>
+              
               <input
                 autoFocus
                 type="text"
@@ -59,103 +59,128 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                 value={formData.name}
                 onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
                 placeholder="Enter your name"
-                className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-500 text-lg transition-all"
+                className="w-full px-8 py-5 bg-slate-50 border-2 border-slate-100 rounded-[24px] focus:outline-none focus:border-orange-500 text-lg transition-all shadow-inner font-bold"
               />
+
               <div className="space-y-4">
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest">Select Your Language</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {LANGUAGES.slice(0, 4).map(lang => (
+                <div className="flex items-center gap-2">
+                  <Globe size={16} className="text-orange-500" />
+                  <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Select Your Language</label>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {LANGUAGES.map(lang => (
                     <button
                       key={lang.code}
                       type="button"
                       onClick={() => setFormData(prev => ({ ...prev, preferredLanguage: lang.code }))}
-                      className={`px-3 py-3 rounded-xl border-2 text-sm font-bold transition-all ${formData.preferredLanguage === lang.code ? 'border-orange-600 bg-orange-50 text-orange-600' : 'border-slate-50 bg-slate-50 text-slate-400'}`}
+                      className={`relative px-4 py-4 rounded-[20px] border-2 text-sm font-bold transition-all flex items-center justify-center gap-2 ${formData.preferredLanguage === lang.code ? 'border-orange-600 bg-orange-50 text-orange-600 shadow-md shadow-orange-100' : 'border-slate-50 bg-slate-50 text-slate-400 hover:border-slate-200'}`}
                     >
                       {lang.name}
+                      {formData.preferredLanguage === lang.code && (
+                        <CheckCircle size={14} className="absolute top-2 right-2" />
+                      )}
                     </button>
                   ))}
                 </div>
               </div>
+              
               <button
                 type="button"
                 onClick={nextStep}
                 disabled={!formData.name}
-                className="w-full py-4 bg-orange-600 text-white rounded-2xl font-bold text-lg hover:bg-orange-700 disabled:bg-slate-300 transition-all flex items-center justify-center gap-2 shadow-lg shadow-orange-100"
+                className="w-full py-5 bg-orange-600 text-white rounded-[24px] font-black text-xl hover:bg-orange-700 disabled:bg-slate-200 disabled:text-slate-400 transition-all flex items-center justify-center gap-3 shadow-xl shadow-orange-100 active:scale-95"
               >
-                Next <ArrowRight size={20} />
+                Next Step <ArrowRight size={22} />
               </button>
             </div>
           )}
 
           {step === 2 && (
-            <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600">
-                  <GraduationCap size={24} />
+            <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-700">
+              <div className="space-y-2">
+                <div className="w-14 h-14 bg-blue-100 rounded-[22px] flex items-center justify-center text-blue-600 mb-6 shadow-sm border border-blue-50">
+                  <GraduationCap size={28} />
                 </div>
-                <h2 className="text-2xl font-black text-slate-900">Your School Info</h2>
+                <h2 className="text-3xl font-black text-slate-900 font-heading leading-tight">Great!<br/>Your School Info</h2>
               </div>
-              <div className="space-y-4">
+
+              <div className="space-y-5">
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-2">School Board</label>
-                  <select
-                    value={formData.board}
-                    onChange={e => setFormData(prev => ({ ...prev, board: e.target.value as Board }))}
-                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-xl focus:border-orange-500 outline-none"
-                  >
-                    {BOARDS.map(b => <option key={b} value={b}>{b}</option>)}
-                  </select>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Which School Board?</label>
+                  <div className="grid grid-cols-1 gap-2">
+                    {BOARDS.map(b => (
+                      <button
+                        key={b}
+                        type="button"
+                        onClick={() => setFormData(prev => ({ ...prev, board: b as Board }))}
+                        className={`px-5 py-4 rounded-2xl border-2 text-sm font-bold text-left transition-all ${formData.board === b ? 'border-blue-600 bg-blue-50 text-blue-600' : 'border-slate-50 bg-slate-50 text-slate-400'}`}
+                      >
+                        {b}
+                      </button>
+                    ))}
+                  </div>
                 </div>
+
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Class / Grade</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Which Class / Grade?</label>
                   <select
                     required
                     value={formData.grade}
                     onChange={e => setFormData(prev => ({ ...prev, grade: e.target.value }))}
-                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-xl focus:border-orange-500 outline-none"
+                    className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-[20px] focus:border-orange-500 outline-none font-bold"
                   >
-                    <option value="">Select Class</option>
+                    <option value="">Select Grade</option>
                     {[1,2,3,4,5,6,7,8,9,10,11,12].map(n => <option key={n} value={`Class ${n}`}>Class {n}</option>)}
                   </select>
                 </div>
               </div>
+
               <button
                 type="button"
                 onClick={nextStep}
                 disabled={!formData.grade}
-                className="w-full py-4 bg-orange-600 text-white rounded-2xl font-bold text-lg hover:bg-orange-700 disabled:bg-slate-300 transition-all flex items-center justify-center gap-2"
+                className="w-full py-5 bg-orange-600 text-white rounded-[24px] font-black text-xl hover:bg-orange-700 disabled:bg-slate-200 disabled:text-slate-400 transition-all flex items-center justify-center gap-3 shadow-xl shadow-orange-100 active:scale-95"
               >
-                Next <ArrowRight size={20} />
+                Continue <ArrowRight size={22} />
               </button>
             </div>
           )}
 
           {step === 3 && (
-            <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center text-green-600">
-                  <MapPin size={24} />
+            <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-700">
+              <div className="space-y-2">
+                <div className="w-14 h-14 bg-green-100 rounded-[22px] flex items-center justify-center text-green-600 mb-6 shadow-sm border border-green-50">
+                  <MapPin size={28} />
                 </div>
-                <h2 className="text-2xl font-black text-slate-900">Last Step!</h2>
+                <h2 className="text-3xl font-black text-slate-900 font-heading leading-tight">Almost there!<br/>Your Location</h2>
               </div>
+
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Your State</label>
-                <select
-                  value={formData.state}
-                  onChange={e => setFormData(prev => ({ ...prev, state: e.target.value }))}
-                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-xl focus:border-orange-500 outline-none mb-6"
-                >
-                  {INDIAN_STATES.map(s => <option key={s} value={s}>{s}</option>)}
-                </select>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Which State are you from?</label>
+                <div className="max-h-[240px] overflow-y-auto pr-2 grid grid-cols-1 gap-2 custom-scrollbar">
+                  {INDIAN_STATES.map(s => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => setFormData(prev => ({ ...prev, state: s }))}
+                      className={`px-5 py-4 rounded-2xl border-2 text-sm font-bold text-left transition-all ${formData.state === s ? 'border-green-600 bg-green-50 text-green-700' : 'border-slate-50 bg-slate-50 text-slate-400 hover:border-slate-200'}`}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="bg-orange-50 p-4 rounded-2xl border border-orange-100">
-                <p className="text-xs text-orange-700 leading-relaxed font-medium text-center">
+
+              <div className="bg-orange-50 p-6 rounded-[28px] border border-orange-100 relative">
+                <div className="absolute top-3 left-3 text-orange-200"><Sparkles size={20} /></div>
+                <p className="text-xs text-orange-700 leading-relaxed font-bold text-center italic">
                   "Education is the most powerful weapon which you can use to change the world."
                 </p>
               </div>
+
               <button
                 type="submit"
-                className="w-full py-5 bg-orange-600 text-white rounded-2xl font-black text-xl hover:bg-orange-700 shadow-xl shadow-orange-100 active:scale-95 transition-all flex items-center justify-center gap-3"
+                className="w-full py-6 bg-gradient-to-tr from-orange-600 to-orange-400 text-white rounded-[28px] font-black text-2xl hover:brightness-110 shadow-2xl shadow-orange-200 active:scale-95 transition-all flex items-center justify-center gap-4"
               >
                 Let's Study! <Sparkles size={24} />
               </button>
